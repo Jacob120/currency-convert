@@ -13,6 +13,7 @@ describe('ConvertPLNtoUSD', () => {
     expect(convertPLNToUSD('-543')).toBeNaN();
   });
   it('should return NaN when input is empty', () => {   
+    // eslint-disable-next-line no-unused-expressions
     expect(convertPLNToUSD()).toBeNaN;
   });
   it('should return "Error" when input is different than number and string', () => {   
