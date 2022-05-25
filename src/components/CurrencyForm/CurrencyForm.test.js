@@ -20,5 +20,15 @@ describe('Component CurrencyForm', () => {
 
     // check if action callback was called once 
     expect(action).toHaveBeenCalledTimes(1);
+
+    // find field elems
+    const amountField = screen.getByTestId('amount');
+    const fromField = screen.getByTestId('from-select');
+    const toField = screen.getByTestId('to-select');
+
+    // set test values to fields
+    userEvent.type(amountField, '100');
+    userEvent.selectOptions(fromField, 'PLN');
+    userEvent.selectOptions(toField, 'USD');
   });
 });
