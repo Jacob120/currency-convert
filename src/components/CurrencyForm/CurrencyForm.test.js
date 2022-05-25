@@ -15,12 +15,6 @@ describe('Component CurrencyForm', () => {
     // find "convert" button
     const submitButton = screen.getByText('Convert');
 
-    // simulate user click on "convert" button
-    userEvent.click(submitButton);
-
-    // check if action callback was called once 
-    expect(action).toHaveBeenCalledTimes(1);
-
     // find field elems
     const amountField = screen.getByTestId('amount');
     const fromField = screen.getByTestId('from-select');
@@ -30,5 +24,12 @@ describe('Component CurrencyForm', () => {
     userEvent.type(amountField, '100');
     userEvent.selectOptions(fromField, 'PLN');
     userEvent.selectOptions(toField, 'USD');
+
+    // simulate user click on "convert" button
+    userEvent.click(submitButton);
+
+    // check if action callback was called once and with proper argument 
+    expect(action).toHaveBeenCalledTimes(1);
+    expect(action).toHaveBeenCalledWith({ amount: 100, from: 'PLN', to: 'USD' })
   });
 });
