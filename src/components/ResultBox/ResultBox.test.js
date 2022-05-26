@@ -53,5 +53,11 @@ import ResultBox from './ResultBox';
         const output = screen.getByTestId('output');
         expect(output).toHaveTextContent(`${formatFromUSD} = ${formatFromUSD}`);
       }); 
+
     }
+    it('should render error when amount < 0', () => {
+      render(<ResultBox from="PLN" to="USD" amount={-1} />);
+      const output = screen.getByTestId('output-error');
+      expect(output).toHaveTextContent(`Wrong value`);
+    }); 
   });
