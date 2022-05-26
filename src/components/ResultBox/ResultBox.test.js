@@ -19,14 +19,14 @@ import ResultBox from './ResultBox';
         currency: 'PLN',
       });
 
-      const amountToString = formatter.format(amountValue);
-      const amountResultToString = (amountValue / 3.5).toFixed(2);
-      const test = (amountToString +  ' = $' + amountResultToString).replace(/\u00a0/g, ' ');
+      const amountFormat = formatter.format(amountValue);
+      const amountResult = (amountValue / 3.5).toFixed(2);
+      const outputResult = (amountFormat +  ' = $' + amountResult).replace(/\u00a0/g, ' ');
 
       it('should render proper info about conversion when PLN -> USD', () => {
         render(<ResultBox from="PLN" to="USD" amount={amountValue} />);
         const output = screen.getByTestId('output');
-        expect(output).toHaveTextContent(test);
+        expect(output).toHaveTextContent(outputResult);
       });    
     }
   });
