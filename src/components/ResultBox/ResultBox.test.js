@@ -18,13 +18,14 @@ import ResultBox from './ResultBox';
         currency: 'PLN',
       });
 
-      const amountToString = formatter.format(amountValue).toString();
-      const amountResultToString = (amountValue / 3.5).toFixed(2).toString()
+      const amountToString = formatter.format(amountValue);
+      const amountResultToString = (amountValue / 3.5).toFixed(2);
+      const test = (amountToString +  ' = $' + amountResultToString).toString();
 
       it('should render proper info about conversion when PLN -> USD', () => {
         render(<ResultBox from="PLN" to="USD" amount={amountValue} />);
         const output = screen.getByTestId('output');
-        expect(output).toHaveTextContent(` ${amountToString} = $${amountResultToString}`);
+        expect(output).toHaveTextContent(test);
       });    
     }
   });
