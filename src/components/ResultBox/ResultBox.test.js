@@ -3,9 +3,28 @@ import '@testing-library/jest-dom/extend-expect';
 import ResultBox from './ResultBox';
 
   describe('Component ResultBox', () => {
-    it('should render proper info about conversion when PLN -> USD', () => {
-      render(<ResultBox from="PLN" to="USD" amount={100} />);
-      const output = screen.getByTestId('output');
-      expect(output).toHaveTextContent('PLN 100.00 = $28.57');
-    });    
+
+    const testCases = [
+      {amount: '100'},
+      {amount: '59'},
+      {amount: '1111'},
+    ]
+
+    for (const testObj of testCases) {
+      const amountValue = parseInt(testObj.amount)
+
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'PLN',
+      });
+
+      const amountToString = formatter.format(amountValue).toString();
+      const amountResultToString = (amountValue / 3.5).toFixed(2).toString()
+
+      it('should render proper info about conversion when PLN -> USD', () => {
+        render(<ResultBox from="PLN" to="USD" amount={amountValue} />);
+        const output = screen.getByTestId('output');
+        expect(output).toHaveTextContent(` ${amountToString} = $${amountResultToString}`);
+      });    
+    }
   });
