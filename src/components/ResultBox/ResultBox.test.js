@@ -34,14 +34,24 @@ import ResultBox from './ResultBox';
         render(<ResultBox from="PLN" to="USD" amount={parseInt(testObj.amount)} />);
         const output = screen.getByTestId('output');
         expect(output).toHaveTextContent(`${formatFromPLN} = ${formatToUSD}`);
-      });    
-
-   
+      });       
 
       it('should render proper info about conversion when USD -> PLN', () => {
         render(<ResultBox from="USD" to="PLN" amount={parseInt(testObj.amount)} />);
         const output = screen.getByTestId('output');
         expect(output).toHaveTextContent(`${formatFromUSD} = ${formatToPLN}`);
       });   
+
+      it('should render proper info about conversion when PLN -> PLN', () => {
+        render(<ResultBox from="PLN" to="PLN" amount={parseInt(testObj.amount)} />);
+        const output = screen.getByTestId('output');
+        expect(output).toHaveTextContent(`${formatFromPLN} = ${formatFromPLN}`);
+      }); 
+
+      it('should render proper info about conversion when USD -> USD', () => {
+        render(<ResultBox from="USD" to="USD" amount={parseInt(testObj.amount)} />);
+        const output = screen.getByTestId('output');
+        expect(output).toHaveTextContent(`${formatFromUSD} = ${formatFromUSD}`);
+      }); 
     }
   });
