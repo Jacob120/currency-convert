@@ -5,10 +5,11 @@ import ResultBox from './ResultBox';
   describe('Component ResultBox', () => {
 
     const testCases = [
-      {amount: '100'},
-      {amount: '59'},
-      {amount: '1111'},
-    ]
+      { amount: '100', from: 'PLN', to: 'USD' },
+      { amount: '20', from: 'USD', to: 'PLN' },
+      { amount: '200', from: 'PLN', to: 'USD' },
+      { amount: '345', from: 'USD', to: 'PLN' },
+    ];
 
     for (const testObj of testCases) {
       const amountValue = parseInt(testObj.amount)
@@ -20,7 +21,7 @@ import ResultBox from './ResultBox';
 
       const amountToString = formatter.format(amountValue);
       const amountResultToString = (amountValue / 3.5).toFixed(2);
-      const test = (amountToString +  ' = $' + amountResultToString).toString();
+      const test = (amountToString +  ' = $' + amountResultToString).replace(/\u00a0/g, ' ');
 
       it('should render proper info about conversion when PLN -> USD', () => {
         render(<ResultBox from="PLN" to="USD" amount={amountValue} />);
